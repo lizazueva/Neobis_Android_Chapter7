@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Neobis_Android_Chapter7</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_start">Начать пользоваться</string>
+    <string name="text_smile">Смейся\nи улыбайся\nкаждый день"</string>
+    <string name="text_account">Есть аккаунт? Войти</string>
 </resources>

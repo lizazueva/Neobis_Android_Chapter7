@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="TextSmileStyle">
+        <item name="android:textSize">35sp</item>
+        <item name="android:textColor">#5D5FEF</item>
+        <item name="android:lineSpacingExtra">8dp</item>
+        <item name="android:fontFamily">@font/gothampro</item>
+    </style>
+
+    <style name="TextAccount">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">#292929</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+</resources>

@@ -1,4 +1,4 @@
-package com.example.neobis_android_chapter7.utils;
+package com.example.neobis_android_chapter7.utils
 
 class Constants {
     companion object{
