@@ -36,6 +36,8 @@
         android:layout_height="65dp"
         android:layout_marginTop="11dp"
         android:text="@string/button_start"
+        android:background="@drawable/button_bt"
+        android:enabled="true"
         android:backgroundTint="@color/button_color"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
