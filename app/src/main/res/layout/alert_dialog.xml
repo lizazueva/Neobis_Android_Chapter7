@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="20dp"
+    android:layout_marginHorizontal="20dp">
+
+    <LinearLayout
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_weight="1"
+            android:src="@drawable/smile" />
+
+        <TextView
+            android:id="@+id/text_alert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/gothampro"
+            android:gravity="center"
+            android:text="@string/text_alert"
+            android:textColor="#000000"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:id="@+id/button_close"
+            android:layout_width="280dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginHorizontal="20dp"
+            android:backgroundTint="@color/button_color"
+            android:background="@drawable/button_bt"
+            android:enabled="true"
+            android:text="@string/button_close"/>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

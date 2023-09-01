@@ -28,6 +28,8 @@ class AuthorizationFragment : Fragment() {
 
         viewModelAuthorizationFragment = (activity as MainActivity).myViewModel
 
+
+
     }
 
 }

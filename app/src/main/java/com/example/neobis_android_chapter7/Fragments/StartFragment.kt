@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.neobis_android_chapter7.MainActivity
 import com.example.neobis_android_chapter7.R
@@ -32,6 +33,14 @@ class StartFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModelStartFragment = (activity as MainActivity).myViewModel
+
+        binding.buttonStart.setOnClickListener{
+            findNavController().navigate(R.id.action_startFragment_to_registrationFragment)
+        }
+
+        binding.textEnter.setOnClickListener {
+            findNavController().navigate(R.id.action_startFragment_to_authorizationFragment)
+        }
 
     }
 }
