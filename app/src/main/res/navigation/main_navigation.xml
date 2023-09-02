@@ -13,22 +13,31 @@
         <action
             android:id="@+id/action_startFragment_to_authorizationFragment"
             app:destination="@id/authorizationFragment" />
-        <action
-            android:id="@+id/action_startFragment_to_registrationFragment"
-            app:destination="@id/registrationFragment" />
     </fragment>
     <fragment
         android:id="@+id/authorizationFragment"
         android:name="com.example.neobis_android_chapter7.Fragments.AuthorizationFragment"
         android:label="fragment_authorization"
-        tools:layout="@layout/fragment_authorization" />
+        tools:layout="@layout/fragment_authorization" >
+        <action
+            android:id="@+id/action_authorizationFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_authorizationFragment_to_returnFragment"
+            app:destination="@id/returnFragment" />
+    </fragment>
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.example.neobis_android_chapter7.Fragments.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
         <action
-            android:id="@+id/action_registrationFragment_to_startFragment"
-            app:destination="@id/startFragment" />
+            android:id="@+id/action_registrationFragment_to_authorizationFragment"
+            app:destination="@id/authorizationFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/returnFragment"
+        android:name="com.example.neobis_android_chapter7.Fragments.ReturnFragment"
+        android:label="fragment_return"
+        tools:layout="@layout/fragment_return" />
 </navigation>

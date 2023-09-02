@@ -6,4 +6,11 @@
     </style>
 
     <style name="Theme.Neobis_Android_Chapter7" parent="Base.Theme.Neobis_Android_Chapter7" />
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Устанавливаем цвет обводки при активации -->
+        <item name="colorControlActivated">@color/black</item>
+        <!-- Устанавливаем цвет курсора при вводе -->
+        <item name="colorAccent">@color/black</item>
+    </style>
 </resources>

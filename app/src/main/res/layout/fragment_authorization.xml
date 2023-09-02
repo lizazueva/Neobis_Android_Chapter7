@@ -7,72 +7,102 @@
     tools:context=".Fragments.AuthorizationFragment">
 
     <ImageView
-        android:id="@+id/image_smile"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:id="@+id/image_book"
+        android:layout_width="186dp"
+        android:layout_height="194dp"
         android:layout_marginTop="25dp"
-        android:src="@drawable/smile"
+        android:src="@drawable/img_book"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/text_welcom"
+        style="@style/TextTitleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/text_welcom"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/image_book" />
 
-    <EditText
-        android:id="@+id/editText_mail"
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/editText_login"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="20dp"
         android:background="@drawable/search_back"
+        style="@style/MyTextInputEditTextStyle"
         android:ems="10"
-        android:hint="Электронная почта"
+        android:hint="@string/editText_login"
         android:inputType="text"
         android:paddingStart="10dp"
+        android:paddingEnd="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_smile" />
+        app:layout_constraintTop_toBottomOf="@id/text_welcom">
 
-    <EditText
-        android:id="@+id/editText_password"
+    </com.google.android.material.textfield.TextInputEditText>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_password"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/search_back"
-        android:ems="10"
-        android:hint="Пароль"
-        android:inputType="text"
-        android:paddingStart="10dp"
+        style="@style/MyTextInputLayoutStyle"
+        android:theme="@style/AppTheme"
+        app:passwordToggleEnabled="true"
+        app:boxStrokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_mail" />
+        app:layout_constraintTop_toBottomOf="@id/editText_login">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_password"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/search_back"
+            android:ems="10"
+            android:theme="@style/AppTheme"
+            style="@style/MyTextInputEditTextStyle"
+            android:hint="Пароль (тоже введи)"
+            android:inputType="textPassword"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/button_further"
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/button_bt"
+        android:backgroundTint="@color/black"
         android:enabled="true"
         android:text="Войти"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_password" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_password" />
 
     <TextView
-        android:id="@+id/text_forget_password"
+        android:id="@+id/text_no_account"
         style="@style/TextAccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:text="Забыли пароль?"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="@string/text_no_account"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_further" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,26 +7,16 @@
     tools:context=".Fragments.RegistrationFragment">
 
 
-    <ImageView
-        android:id="@+id/image_smile"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="93dp"
-        android:src="@drawable/smile"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/text_smile"
-        app:layout_constraintTop_toBottomOf="@+id/text_registration" />
-
     <TextView
-        android:id="@+id/text_smile"
-        style="@style/TextSmileStyle"
-        android:layout_width="261dp"
-        android:layout_height="134dp"
-        android:layout_marginStart="20dp"
+        android:id="@+id/text_create_acc"
+        style="@style/TextTitleStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="@string/text_smile"
+        android:gravity="center"
+        android:textSize="24sp"
+        android:text="@string/text_create_acc"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_registration" />
 
@@ -44,7 +34,7 @@
         android:paddingStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_smile">
+        app:layout_constraintTop_toBottomOf="@+id/text_create_acc">
 
     </com.google.android.material.textfield.TextInputEditText>
 
@@ -67,21 +57,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:fontFamily="@font/gothampro"
+        style="@style/TextAccount"
         android:text="@string/registration"
-        android:textColor="#000000"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/image_back"
-        android:layout_width="44dp"
-        android:layout_height="28dp"
+        android:layout_width="34dp"
+        android:layout_height="18dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/btn_back"
+        android:src="@drawable/ic_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

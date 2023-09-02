@@ -8,4 +8,11 @@
     <string name="registration">Регистрация</string>
     <string name="text_alert">На вашу почту\n «%s» было\n отправлено письмо</string>
     <string name="button_close">Закрыть</string>
+    <string name="text_teacher">Твой личный репетитор</string>
+    <string name="text_title">Lorby</string>
+    <string name="editText_login">Введи туда-сюда логин</string>
+    <string name="text_welcom">Вэлком бэк!</string>
+    <string name="text_no_account">У меня еще нет аккаунта</string>
+    <string name="text_exit">Выйти</string>
+    <string name="text_create_acc">Создать аккаунт\n Lorby</string>
 </resources>

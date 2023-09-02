@@ -43,7 +43,7 @@ class RegistrationFragment : Fragment() {
         viewModelRegistrationFragment = (activity as MainActivity).myViewModel
 
         binding.imageBack.setOnClickListener {
-            findNavController().navigate(R.id.action_registrationFragment_to_startFragment)
+            findNavController().navigate(R.id.action_registrationFragment_to_authorizationFragment)
         }
 
         checkInput()

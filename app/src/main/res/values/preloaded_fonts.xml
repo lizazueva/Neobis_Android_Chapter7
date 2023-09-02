@@ -3,5 +3,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/alatsi</item>
         <item>@font/andika</item>
+        <item>@font/m_plus_1p_light</item>
+        <item>@font/m_plus_1p_medium</item>
     </array>
 </resources>
