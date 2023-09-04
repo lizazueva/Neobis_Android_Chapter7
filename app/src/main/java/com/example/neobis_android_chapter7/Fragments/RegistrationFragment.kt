@@ -51,22 +51,20 @@ class RegistrationFragment : Fragment() {
         checkInput()
 
 
-
-
     }
 
     private fun checkInput() {
-        binding.editTextMail.addTextChangedListener (inputText)
-        binding.editTextLogin.addTextChangedListener (inputText)
-        binding.editTextPassword.addTextChangedListener (inputText)
-        binding.repeatPassword.addTextChangedListener (inputText)
+        binding.editTextMail.addTextChangedListener(inputText)
+        binding.editTextLogin.addTextChangedListener(inputText)
+        binding.editTextPassword.addTextChangedListener(inputText)
+        binding.repeatPassword.addTextChangedListener(inputText)
 
         binding.buttonFurther.setOnClickListener {
 
         }
     }
 
-    private val inputText = object:TextWatcher{
+    private val inputText = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
         }
 
@@ -82,45 +80,15 @@ class RegistrationFragment : Fragment() {
             val buttonFurther = binding.buttonFurther
 
             validateEmail(emailInput)
-            if (binding.textInputLayoutEditTextMail.helperText == null)
-            { isEmailValid = true}
+            validateLogin(loginInput)
+            if (binding.textInputLayoutEditTextMail.helperText == null
+                && binding.textInputLayoutEditTextMail.helperText == null) {
+                isEmailValid = true
+                isLoginValid = true
+            }
 
 
-//            val isEmailMatches = emailInput.matches(Regex("A-Za-z@."))
-//            val isEmailEmpty = emailInput.isEmpty()
-//            val isEmailContains = emailInput.contains('@')&& emailInput.contains('.')
-//
-//            val EmailValid = if (!isEmailMatches) {
-//                binding.editTextMail.error = "Присутствуют недопустимые символы"
-//            } else if (isEmailEmpty) {
-//                binding.editTextMail.error = "Заполните это поле"
-//            } else if (!isEmailContains) {
-//                binding.editTextMail.error = "Нет специальных символов @, ."
-//            } else {
-//                binding.editTextMail.error = null
-//                 isEmailValid = true
-//            }
-
-
-            val isLoginEmpty = loginInput.isEmpty()
-            val isLoginMatches = loginInput.matches(Regex("[A-Za-z]*"))
-
-//            val LoginValid = if (!isLoginMatches) {
-//                binding.editTextLogin.error = "Присутствуют недопустимые символы"
-//            } else if (isLoginEmpty) {
-//                binding.editTextLogin.error = "Заполните это поле"
-//            } else {
-//                binding.editTextLogin.error = null
-//                isLoginValid = true
-//            }
-
-
-
-//            val isPassword = passwordInput
-
-
-
-            buttonFurther.isEnabled = isEmailValid
+            buttonFurther.isEnabled = isEmailValid && isLoginValid
         }
 
         override fun afterTextChanged(p0: Editable?) {
@@ -150,6 +118,41 @@ class RegistrationFragment : Fragment() {
         } else {
             binding.textInputLayoutEditTextMail.helperText = null
             binding.textInputLayoutEditTextMail.editText?.setTextColor(Color.BLACK)
+
+        }
+    }
+
+    private fun validateLogin(login: String) {
+
+        val isLoginEmpty = login.isEmpty()
+        val isLoginMatches = login.matches(Regex("[A-Za-z]*"))
+
+        if (!isLoginMatches) {
+            binding.textInputLayoutEditTextLogin.helperText = "Присутствуют недопустимые символы"
+            binding.textInputLayoutEditTextLogin.editText?.setTextColor(Color.RED)
+            binding.textInputLayoutEditTextLogin.setErrorTextColor(ColorStateList.valueOf(Color.RED))
+        } else if (isLoginEmpty) {
+            binding.textInputLayoutEditTextLogin.helperText = "Заполните это поле"
+            binding.textInputLayoutEditTextLogin.editText?.setTextColor(Color.RED)
+            binding.textInputLayoutEditTextLogin.setErrorTextColor(ColorStateList.valueOf(Color.RED))
+        } else {
+            binding.textInputLayoutEditTextLogin.helperText = null
+            binding.textInputLayoutEditTextLogin.setErrorTextColor(ColorStateList.valueOf(Color.BLACK))
+
+        }
+    }
+
+    private fun validatePassword(password: String) {
+
+        val isPasswordEmpty = password.isEmpty()
+        val isPasswordMatches = password.matches(Regex("[A-Za-z]*"))
+
+        if (!isPasswordMatches) {
+
+        } else if (isPasswordEmpty) {
+
+        } else {
+
 
         }
     }

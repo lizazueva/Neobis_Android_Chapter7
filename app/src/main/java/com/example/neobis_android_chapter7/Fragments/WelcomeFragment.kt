@@ -4,8 +4,6 @@ import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.style.ForegroundColorSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,20 +11,18 @@ import android.view.ViewGroup
 import android.view.Window
 import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter7.R
-import com.example.neobis_android_chapter7.databinding.ActivityMainBinding.inflate
-import com.example.neobis_android_chapter7.databinding.AlertDialogBinding
 import com.example.neobis_android_chapter7.databinding.AlertDialogExitBinding
-import com.example.neobis_android_chapter7.databinding.FragmentWelcomBinding
+import com.example.neobis_android_chapter7.databinding.FragmentWelcomeBinding
 
-class WelcomFragment : Fragment() {
+class WelcomeFragment : Fragment() {
 
-    private lateinit var binding: FragmentWelcomBinding
+    private lateinit var binding: FragmentWelcomeBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentWelcomBinding.inflate(inflater, container, false)
+        binding = FragmentWelcomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -54,7 +50,7 @@ class WelcomFragment : Fragment() {
 
         dialogBinding.buttonYes.setOnClickListener {
             dialog.dismiss()
-            findNavController().navigate(R.id.action_welcomFragment_to_startFragment)
+            findNavController().navigate(R.id.action_welcomeFragment_to_startFragment)
         }
     }
 }

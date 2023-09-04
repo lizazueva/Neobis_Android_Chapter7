@@ -106,35 +106,36 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginStart="5dp">
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp">
 
             <TextView
                 android:id="@+id/helperText1"
                 android:gravity="start"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="• От 8 до 15 символов"
+                android:text="@string/helperText1"
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/helperText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="• Строчные и прописные буквы"
+                android:text="@string/helperText2"
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/helperText3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="• Минимум 1 цифра"
+                android:text="@string/helperText3"
                 android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/helperText4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="• Минимум 1 спецсимвол (!, &quot;, &#35;, &#36;...)"
+                android:text="@string/helperText4"
             android:textSize="12sp" />
 
         </LinearLayout>

@@ -4,7 +4,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.ReturnFragment">
+    tools:context=".Fragments.RegistrationLetterFragment">
+
+    <TextView
+        android:id="@+id/text_registration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        style="@style/TextAccount"
+        android:text="@string/registration"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/image_back"
+        android:layout_width="34dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/ic_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/text_welcome"
@@ -12,47 +35,48 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="150dp"
         style="@style/TextTitleStyle"
-        android:text="@string/text_welcome"
-        android:textSize="26sp"
+        android:text="@string/text_welcome_letter"
+        android:textSize="20sp"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_teacher"
+        android:id="@+id/text_letter_no"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:gravity="center"
         android:fontFamily="@font/m_plus_1p_light"
-        android:text="Lorby - твой личный репетитор"
+        android:text="@string/text_letter_no"
         android:textColor="#212121"
-        android:textSize="20sp"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_welcome" />
 
     <ImageView
-        android:id="@+id/image_man"
-        android:layout_width="296dp"
-        android:layout_height="314dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/img_man"
+        android:id="@+id/image_woman"
+        android:layout_width="224dp"
+        android:layout_height="230dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/img_girl"
+        app:layout_constraintBottom_toTopOf="@+id/text_letter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_teacher" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/text_exit"
+        android:id="@+id/text_letter"
         style="@style/TextTitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
         android:textSize="16sp"
-        android:text="@string/text_exit"
+        android:text="Письмо не пришло"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
