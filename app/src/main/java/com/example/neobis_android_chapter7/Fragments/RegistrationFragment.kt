@@ -21,6 +21,8 @@ import com.example.neobis_android_chapter7.databinding.AlertDialogBinding
 import com.example.neobis_android_chapter7.databinding.FragmentAuthorizationBinding
 import com.example.neobis_android_chapter7.databinding.FragmentRegistrationBinding
 import com.example.neobis_android_chapter7.viewModel.MyViewModel
+import android.content.res.ColorStateList
+
 
 
 class RegistrationFragment : Fragment() {
@@ -50,43 +52,17 @@ class RegistrationFragment : Fragment() {
 
 
 
-    }
 
-    private fun callDialog() {
-        val dialogBinding = AlertDialogBinding.inflate(layoutInflater)
-        val dialog = Dialog(requireContext())
-
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setContentView(dialogBinding.root)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-
-        val email = binding.editTextMail.text.toString().trim()
-        val textAlert = getString(R.string.text_alert, email)
-
-        val spannableString = SpannableString(textAlert)
-        val emailStartIndex = textAlert.indexOf(email)
-        val emailEndIndex = emailStartIndex + email.length
-
-        spannableString.setSpan(
-            ForegroundColorSpan(Color.BLUE),
-            emailStartIndex,
-            emailEndIndex,
-            SpannableString.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-
-        dialogBinding.textAlert.text = spannableString
-
-        dialogBinding.buttonClose.setOnClickListener {
-            dialog.dismiss()
-        }
     }
 
     private fun checkInput() {
         binding.editTextMail.addTextChangedListener (inputText)
+        binding.editTextLogin.addTextChangedListener (inputText)
+        binding.editTextPassword.addTextChangedListener (inputText)
+        binding.repeatPassword.addTextChangedListener (inputText)
+
         binding.buttonFurther.setOnClickListener {
-            callDialog()
+
         }
     }
 
@@ -95,10 +71,56 @@ class RegistrationFragment : Fragment() {
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            var isEmailValid = false
+            var isLoginValid = false
+
             val emailInput = binding.editTextMail.text.toString().trim()
+            val loginInput = binding.editTextLogin.text.toString().trim()
+            val passwordInput = binding.editTextPassword.text.toString().trim()
+            val repeatPasswordInput = binding.repeatPassword.text.toString().trim()
+
             val buttonFurther = binding.buttonFurther
 
-            buttonFurther.isEnabled = emailInput.contains('@')&& emailInput.contains('.')
+            validateEmail(emailInput)
+            if (binding.textInputLayoutEditTextMail.helperText == null)
+            { isEmailValid = true}
+
+
+//            val isEmailMatches = emailInput.matches(Regex("A-Za-z@."))
+//            val isEmailEmpty = emailInput.isEmpty()
+//            val isEmailContains = emailInput.contains('@')&& emailInput.contains('.')
+//
+//            val EmailValid = if (!isEmailMatches) {
+//                binding.editTextMail.error = "Присутствуют недопустимые символы"
+//            } else if (isEmailEmpty) {
+//                binding.editTextMail.error = "Заполните это поле"
+//            } else if (!isEmailContains) {
+//                binding.editTextMail.error = "Нет специальных символов @, ."
+//            } else {
+//                binding.editTextMail.error = null
+//                 isEmailValid = true
+//            }
+
+
+            val isLoginEmpty = loginInput.isEmpty()
+            val isLoginMatches = loginInput.matches(Regex("[A-Za-z]*"))
+
+//            val LoginValid = if (!isLoginMatches) {
+//                binding.editTextLogin.error = "Присутствуют недопустимые символы"
+//            } else if (isLoginEmpty) {
+//                binding.editTextLogin.error = "Заполните это поле"
+//            } else {
+//                binding.editTextLogin.error = null
+//                isLoginValid = true
+//            }
+
+
+
+//            val isPassword = passwordInput
+
+
+
+            buttonFurther.isEnabled = isEmailValid
         }
 
         override fun afterTextChanged(p0: Editable?) {
@@ -106,4 +128,29 @@ class RegistrationFragment : Fragment() {
 
     }
 
+    private fun validateEmail(email: String) {
+        val isEmailMatches = email.matches(Regex("[A-Za-z@.]*"))
+        val isEmailEmpty = email.isEmpty()
+        val isEmailContains = email.contains('@') && email.contains('.')
+
+        if (!isEmailMatches) {
+            binding.textInputLayoutEditTextMail.helperText = "Присутствуют недопустимые символы"
+            binding.textInputLayoutEditTextMail.editText?.setTextColor(Color.RED)
+            binding.textInputLayoutEditTextMail.setErrorTextColor(ColorStateList.valueOf(Color.RED))
+
+
+        } else if (isEmailEmpty) {
+            binding.textInputLayoutEditTextMail.helperText = "Заполните это поле"
+            binding.textInputLayoutEditTextMail.editText?.setTextColor(Color.RED)
+
+        } else if (!isEmailContains) {
+            binding.textInputLayoutEditTextMail.helperText = "Нет специальных символов @, ."
+            binding.textInputLayoutEditTextMail.editText?.setTextColor(Color.RED)
+
+        } else {
+            binding.textInputLayoutEditTextMail.helperText = null
+            binding.textInputLayoutEditTextMail.editText?.setTextColor(Color.BLACK)
+
+        }
+    }
 }

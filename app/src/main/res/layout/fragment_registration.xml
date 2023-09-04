@@ -20,77 +20,156 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_registration" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editText_mail"
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_editText_mail"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/search_back"
-        android:ems="10"
-        android:hint="Введи адрес почты"
-        android:inputType="text"
-        android:paddingStart="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_create_acc">
-
-    </com.google.android.material.textfield.TextInputEditText>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editText_login"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/search_back"
-        android:ems="10"
-        android:hint="Придумай логин"
-        android:inputType="text"
-        android:paddingStart="10dp"
+        style="@style/MyTextInputLayoutStyle"
+        app:passwordToggleEnabled="false"
+        app:boxStrokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_mail">
+        app:layout_constraintTop_toBottomOf="@id/text_create_acc">
 
-    </com.google.android.material.textfield.TextInputEditText>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_mail"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/search_back"
+            android:ems="10"
+            android:theme="@style/AppTheme"
+            android:hint="Введи адрес почты"
+            android:inputType="textEmailAddress"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editText_password"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_editText_login"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/search_back"
-        android:ems="10"
-        android:hint="Введи пароль"
-        android:inputType="text"
-        android:paddingStart="10dp"
+        style="@style/MyTextInputLayoutStyle"
+        app:passwordToggleEnabled="false"
+        app:boxStrokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_login">
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_editText_mail">
 
-    </com.google.android.material.textfield.TextInputEditText>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_login"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/search_back"
+            android:ems="10"
+            android:theme="@style/AppTheme"
+            android:hint="Придумай логин"
+            android:inputType="text"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
 
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/repeat_password"
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_password"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/search_back"
-        android:ems="10"
-        android:hint="Повтори пароль"
-        android:inputType="text"
-        android:paddingStart="10dp"
+        style="@style/MyTextInputLayoutStyle"
+        app:passwordToggleEnabled="true"
+        app:boxStrokeWidth="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText_password">
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_editText_login">
 
-    </com.google.android.material.textfield.TextInputEditText>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editText_password"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/search_back"
+            android:ems="10"
+            android:theme="@style/AppTheme"
+            android:hint="Введи пароль"
+            android:inputType="textPassword"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="5dp">
+
+            <TextView
+                android:id="@+id/helperText1"
+                android:gravity="start"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• От 8 до 15 символов"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/helperText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Строчные и прописные буквы"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/helperText3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Минимум 1 цифра"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/helperText4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="• Минимум 1 спецсимвол (!, &quot;, &#35;, &#36;...)"
+            android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayout_password_repeat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        style="@style/MyTextInputLayoutStyle"
+        app:passwordToggleEnabled="true"
+        app:boxStrokeWidth="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayout_password">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/repeat_password"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:background="@drawable/search_back"
+            android:ems="10"
+            android:theme="@style/AppTheme"
+            android:hint="Повтори пароль"
+            android:inputType="textPassword"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_further"
@@ -106,7 +185,7 @@
         android:text="Далее"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/repeat_password" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout_password_repeat" />
 
     <TextView
         android:id="@+id/text_registration"

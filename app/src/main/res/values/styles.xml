@@ -23,6 +23,9 @@
         <item name="colorAccent">@color/black</item>
         <!-- Убрать текст hint при вводе -->
         <item name="hintEnabled">false</item>
+        <item name="android:textColorSecondary">@color/red</item>
+        <item name="errorTextColor">@color/red</item>
+
     </style>
 
     <style name="CustomSnackbar">

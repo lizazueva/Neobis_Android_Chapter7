@@ -1,8 +1,6 @@
 package com.example.neobis_android_chapter7.Fragments
 
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,7 +15,6 @@ import com.example.neobis_android_chapter7.R
 import com.example.neobis_android_chapter7.databinding.FragmentAuthorizationBinding
 import com.example.neobis_android_chapter7.viewModel.MyViewModel
 import com.google.android.material.snackbar.Snackbar
-import android.graphics.drawable.GradientDrawable
 
 
 class AuthorizationFragment : Fragment() {
