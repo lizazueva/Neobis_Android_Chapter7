@@ -16,10 +16,18 @@
         <item name="android:textColor">#767676</item>
     </style>
     <style name="MyTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
-        <!-- Убрать нижний бордер -->
-        <item name="boxStrokeWidth">0dp</item>
-
+        <item name="boxStrokeColor">@color/black</item>
+        <!-- Устанавливаем цвет полоски при вводе -->
+        <item name="boxStrokeErrorColor">@android:color/transparent</item>
+        <!-- Устанавливаем цвет курсора при вводе -->
+        <item name="colorAccent">@color/black</item>
         <!-- Убрать текст hint при вводе -->
         <item name="hintEnabled">false</item>
+    </style>
+
+    <style name="CustomSnackbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+<!--        <item name="android:background">@drawable/snackbar</item>-->
     </style>
 </resources>
