@@ -20,4 +20,5 @@
     <string name="text_exit_alert">Выйти?</string>
     <string name="button_no">Нет, остаться</string>
     <string name="button_yes">Да, точно</string>
+    <string name="text_welcome">Добро пожаловать!</string>
 </resources>

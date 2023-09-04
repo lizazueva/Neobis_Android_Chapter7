@@ -99,10 +99,11 @@
 
     <TextView
         android:id="@+id/text_no_account"
-        style="@style/TextAccount"
+        style="@style/TextTitleStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:textSize="16sp"
         android:text="@string/text_no_account"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
