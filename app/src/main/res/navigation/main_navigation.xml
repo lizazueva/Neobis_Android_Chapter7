@@ -39,7 +39,11 @@
         android:id="@+id/returnFragment"
         android:name="com.example.neobis_android_chapter7.Fragments.ReturnFragment"
         android:label="fragment_return"
-        tools:layout="@layout/fragment_return" />
+        tools:layout="@layout/fragment_return" >
+        <action
+            android:id="@+id/action_returnFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
     <fragment
         android:id="@+id/welcomFragment"
         android:name="com.example.neobis_android_chapter7.Fragments.WelcomFragment"

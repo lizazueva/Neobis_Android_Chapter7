@@ -53,6 +53,7 @@ class WelcomFragment : Fragment() {
         }
 
         dialogBinding.buttonYes.setOnClickListener {
+            dialog.dismiss()
             findNavController().navigate(R.id.action_welcomFragment_to_startFragment)
         }
     }
