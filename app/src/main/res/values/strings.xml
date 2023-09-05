@@ -21,9 +21,9 @@
     <string name="button_no">Нет, остаться</string>
     <string name="button_yes">Да, точно</string>
     <string name="text_welcome">Добро пожаловать!</string>
-    <string name="helperText1">• От 8 до 15 символов ❌</string>
+    <string name="helperText1">• От 8 до 15 символов</string>
     <string name="helperText2">• Строчные и прописные буквы</string>
-    <string name="helperText3">• Минимум 1 цифра ✅</string>
+    <string name="helperText3">• Минимум 1 цифра</string>
     <string name="helperText4">• Минимум 1 спецсимвол (!, \", #, $...)</string>
     <string name="text_welcome_letter">Выслали письмо со ссылкой\n для завершения регистрации\n на %s</string>
     <string name="text_letter_no">Если письмо не пришло, не спеши\n ждать совиную почту - лучше проверь\n ящик “Спам”\n\n (´｡• ω •｡`)</string>

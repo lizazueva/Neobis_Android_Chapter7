@@ -82,6 +82,8 @@ class RegistrationFragment : Fragment() {
 
             validateEmail(emailInput)
             validateLogin(loginInput)
+            validatePassword(passwordInput)
+
             if (binding.textInputLayoutEditTextMail.helperText == null
                 && binding.textInputLayoutEditTextMail.helperText == null) {
                 isEmailValid = true
@@ -138,6 +140,7 @@ class RegistrationFragment : Fragment() {
             binding.textInputLayoutEditTextLogin.setErrorTextColor(ColorStateList.valueOf(Color.RED))
         } else {
             binding.textInputLayoutEditTextLogin.helperText = null
+            binding.textInputLayoutEditTextLogin.editText?.setTextColor(Color.BLACK)
             binding.textInputLayoutEditTextLogin.setErrorTextColor(ColorStateList.valueOf(Color.BLACK))
 
         }
@@ -146,15 +149,92 @@ class RegistrationFragment : Fragment() {
     private fun validatePassword(password: String) {
 
         val isPasswordEmpty = password.isEmpty()
-        val isPasswordMatches = password.matches(Regex("[A-Za-z]*"))
+        val isPasswordMatches = password.matches(Regex("[A-Za-z]+"))
+        val containsUppercase = password.matches(Regex(".*[A-Z].*"))
+        val containsLowercase = password.matches(Regex(".*[a-z].*"))
+        val containsSpecialCharacter = password.matches(Regex(".*[!\"#\$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~].*"))
+        val isPasswordLength = password.length !in 8..15
+        val isPasswordOneNumber = password.any { it.isDigit() }
 
-        if (!isPasswordMatches) {
+        val helperText1 = binding.helperText1
+        val helperText2 = binding.helperText2
+        val helperText3 = binding.helperText3
+        val helperText4 = binding.helperText4
 
+        val imageHelperText1 = binding.imageHelperText1
+        val imageHelperText2 = binding.imageHelperText2
+        val imageHelperText3 = binding.imageHelperText3
+        val imageHelperText4 = binding.imageHelperText4
+
+        val validLength = if (isPasswordLength && !isPasswordEmpty) {
+            helperText1.setTextColor(Color.RED)
+            imageHelperText1.setImageResource(R.drawable.nocheck)
+            imageHelperText1.visibility = View.VISIBLE
+            } else if (isPasswordEmpty){
+                imageHelperText1.visibility = View.INVISIBLE
+                helperText1.setTextColor(Color.GRAY)
+            }else {
+                helperText1.setTextColor(Color.GREEN)
+                imageHelperText1.setImageResource(R.drawable.check)
+                imageHelperText1.visibility = View.VISIBLE
+                true
+            }
+
+        val validMatches =  if ((!containsUppercase || !containsLowercase) && !isPasswordEmpty) {
+            helperText2.setTextColor(Color.RED)
+            imageHelperText2.setImageResource(R.drawable.nocheck)
+            imageHelperText2.visibility = View.VISIBLE
         } else if (isPasswordEmpty) {
-
+            helperText2.setTextColor(Color.GRAY)
+            imageHelperText2.visibility = View.INVISIBLE
         } else {
+            helperText2.setTextColor(Color.GREEN)
+            imageHelperText2.setImageResource(R.drawable.check)
+            imageHelperText2.visibility = View.VISIBLE
+            true
+        }
 
+        val validOneNumber = if (!isPasswordOneNumber) {
+            helperText3.setTextColor(Color.RED)
+            imageHelperText3.setImageResource(R.drawable.nocheck)
+            imageHelperText3.visibility = View.VISIBLE
+        } else {
+            helperText3.setTextColor(Color.GREEN)
+            imageHelperText3.setImageResource(R.drawable.check)
+            imageHelperText3.visibility = View.VISIBLE
+            true
+        }
+
+        val validSpecialCharacter = if (!containsSpecialCharacter && !isPasswordEmpty) {
+            helperText4.setTextColor(Color.RED)
+            imageHelperText4.setImageResource(R.drawable.nocheck)
+            imageHelperText4.visibility = View.VISIBLE
+        } else {
+            helperText4.setTextColor(Color.GREEN)
+            imageHelperText4.setImageResource(R.drawable.check)
+            imageHelperText4.visibility = View.VISIBLE
+            true
+        }
+
+        if (isPasswordEmpty) {
+            helperText1.setTextColor(Color.GRAY)
+            imageHelperText1.visibility = View.INVISIBLE
+            helperText2.setTextColor(Color.GRAY)
+            imageHelperText2.visibility = View.INVISIBLE
+            helperText3.setTextColor(Color.GRAY)
+            imageHelperText3.visibility = View.INVISIBLE
+            helperText4.setTextColor(Color.GRAY)
+            imageHelperText4.visibility = View.INVISIBLE
 
         }
-    }
-}
+
+        }
+
+
+//        fun valide():Boolean{
+//            if((validLength && validMatches && validOneNumber)== true){
+//                true
+//            }
+//        }
+//        return valide
+        }

@@ -64,7 +64,6 @@ class RegistrationLetterFragment : Fragment() {
 
         val spannableString = SpannableString(text)
 
-        // Устанавливаем серый цвет для первой части текста
         spannableString.setSpan(
             ForegroundColorSpan(Color.GRAY),
             0,
@@ -72,7 +71,6 @@ class RegistrationLetterFragment : Fragment() {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
-        // Устанавливаем черный цвет для второй части текста
         spannableString.setSpan(
             ForegroundColorSpan(Color.BLACK),
             splitIndex,
@@ -80,7 +78,6 @@ class RegistrationLetterFragment : Fragment() {
             Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
         )
 
-        // Устанавливаем текст с разными цветами в TextView с использованием View Binding
         binding.textLetterNo.text = spannableString
     }
 }
