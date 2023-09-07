@@ -16,7 +16,6 @@ import com.example.neobis_android_chapter7.viewModel.MyViewModel
 import android.content.res.ColorStateList
 
 
-
 class RegistrationFragment : Fragment() {
 
     private lateinit var binding: FragmentRegistrationBinding
@@ -49,6 +48,7 @@ class RegistrationFragment : Fragment() {
         binding.editTextLogin.addTextChangedListener(inputText)
         binding.editTextPassword.addTextChangedListener(inputText)
         binding.repeatPassword.addTextChangedListener(inputText)
+
 
         binding.buttonFurther.setOnClickListener {
             val mail = binding.editTextMail.text.toString().trim()

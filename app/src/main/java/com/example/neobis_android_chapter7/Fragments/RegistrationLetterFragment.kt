@@ -17,6 +17,7 @@ import com.example.neobis_android_chapter7.R
 import com.example.neobis_android_chapter7.databinding.AlertDialogBinding
 import com.example.neobis_android_chapter7.databinding.AlertDialogExitBinding
 import com.example.neobis_android_chapter7.databinding.FragmentRegistrationLetterBinding
+import com.example.neobis_android_chapter7.model.LoginRequest
 
 class RegistrationLetterFragment : Fragment() {
 
@@ -32,6 +33,10 @@ class RegistrationLetterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        var mail = arguments?.getSerializable("mail") as LoginRequest
+        binding.textWelcome.text = getString(R.string.text_welcome_letter, mail)
+
         binding.imageBack.setOnClickListener {
             findNavController().navigate(R.id.action_registrationLetterFragment_to_registrationFragment)
         }
