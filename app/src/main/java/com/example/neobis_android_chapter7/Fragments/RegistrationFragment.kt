@@ -1,24 +1,16 @@
 package com.example.neobis_android_chapter7.Fragments
 
-import android.app.Dialog
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.text.Editable
-import android.text.SpannableString
 import android.text.TextWatcher
-import android.text.style.ForegroundColorSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
-import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter7.MainActivity
 import com.example.neobis_android_chapter7.R
-import com.example.neobis_android_chapter7.databinding.AlertDialogBinding
-import com.example.neobis_android_chapter7.databinding.FragmentAuthorizationBinding
 import com.example.neobis_android_chapter7.databinding.FragmentRegistrationBinding
 import com.example.neobis_android_chapter7.viewModel.MyViewModel
 import android.content.res.ColorStateList
@@ -34,7 +26,6 @@ class RegistrationFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentRegistrationBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -72,6 +63,9 @@ class RegistrationFragment : Fragment() {
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             var isEmailValid = false
             var isLoginValid = false
+            var isPasswordValid = false
+            var isPasswordRepeatValid = false
+
 
             val emailInput = binding.editTextMail.text.toString().trim()
             val loginInput = binding.editTextLogin.text.toString().trim()
@@ -82,19 +76,48 @@ class RegistrationFragment : Fragment() {
 
             validateEmail(emailInput)
             validateLogin(loginInput)
-            validatePassword(passwordInput)
+            val resultValidPassword = validatePassword(passwordInput)
+            validatePasswordRepeat(repeatPasswordInput)
+
+
 
             if (binding.textInputLayoutEditTextMail.helperText == null
-                && binding.textInputLayoutEditTextMail.helperText == null) {
+                && binding.textInputLayoutEditTextLogin.helperText == null && resultValidPassword
+                && binding.textInputLayoutPasswordRepeat.helperText ==null
+            ) {
                 isEmailValid = true
                 isLoginValid = true
+                isPasswordValid = true
+                isPasswordRepeatValid = true
+
             }
 
 
-            buttonFurther.isEnabled = isEmailValid && isLoginValid
+            buttonFurther.isEnabled = isEmailValid && isLoginValid && isPasswordValid && isPasswordRepeatValid
         }
 
         override fun afterTextChanged(p0: Editable?) {
+        }
+
+    }
+
+    private fun validatePasswordRepeat(repeatPasswordInput: String) {
+        val isPasswordEmpty = repeatPasswordInput.isEmpty()
+        val passwordInput = binding.editTextPassword.text.toString().trim()
+
+        if (repeatPasswordInput != passwordInput) {
+            binding.textInputLayoutPasswordRepeat.helperText = "Пароли не совпадают"
+            binding.textInputLayoutPasswordRepeat.editText?.setTextColor(Color.RED)
+            binding.textInputLayoutPasswordRepeat.setErrorTextColor(ColorStateList.valueOf(Color.RED))
+        } else if (isPasswordEmpty) {
+            binding.textInputLayoutPasswordRepeat.helperText = "Заполните это поле"
+            binding.textInputLayoutPasswordRepeat.editText?.setTextColor(Color.RED)
+            binding.textInputLayoutPasswordRepeat.setErrorTextColor(ColorStateList.valueOf(Color.RED))
+        } else {
+            binding.textInputLayoutPasswordRepeat.helperText = null
+            binding.textInputLayoutPasswordRepeat.editText?.setTextColor(Color.BLACK)
+            binding.textInputLayoutPasswordRepeat.setErrorTextColor(ColorStateList.valueOf(Color.BLACK))
+
         }
 
     }
@@ -146,13 +169,14 @@ class RegistrationFragment : Fragment() {
         }
     }
 
-    private fun validatePassword(password: String) {
+    private fun validatePassword(password: String): Boolean {
 
         val isPasswordEmpty = password.isEmpty()
         val isPasswordMatches = password.matches(Regex("[A-Za-z]+"))
         val containsUppercase = password.matches(Regex(".*[A-Z].*"))
         val containsLowercase = password.matches(Regex(".*[a-z].*"))
-        val containsSpecialCharacter = password.matches(Regex(".*[!\"#\$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~].*"))
+        val containsSpecialCharacter =
+            password.matches(Regex(".*[!\"#\$%&'()*+,-./:;<=>?@\\[\\\\\\]^_`{|}~].*"))
         val isPasswordLength = password.length !in 8..15
         val isPasswordOneNumber = password.any { it.isDigit() }
 
@@ -168,27 +192,25 @@ class RegistrationFragment : Fragment() {
 
         val validLength = if (isPasswordLength && !isPasswordEmpty) {
             helperText1.setTextColor(Color.RED)
+            binding.textInputLayoutPassword.editText?.setTextColor(Color.RED)
             imageHelperText1.setImageResource(R.drawable.nocheck)
             imageHelperText1.visibility = View.VISIBLE
-            } else if (isPasswordEmpty){
-                imageHelperText1.visibility = View.INVISIBLE
-                helperText1.setTextColor(Color.GRAY)
-            }else {
-                helperText1.setTextColor(Color.GREEN)
-                imageHelperText1.setImageResource(R.drawable.check)
-                imageHelperText1.visibility = View.VISIBLE
-                true
-            }
+            false
+        }  else {
+            helperText1.setTextColor(Color.parseColor("#1BA228"))
+            imageHelperText1.setImageResource(R.drawable.check)
+            imageHelperText1.visibility = View.VISIBLE
+            true
+        }
 
-        val validMatches =  if ((!containsUppercase || !containsLowercase) && !isPasswordEmpty) {
+        val validMatches = if ((!containsUppercase || !containsLowercase) && !isPasswordEmpty) {
             helperText2.setTextColor(Color.RED)
+            binding.textInputLayoutPassword.editText?.setTextColor(Color.RED)
             imageHelperText2.setImageResource(R.drawable.nocheck)
             imageHelperText2.visibility = View.VISIBLE
-        } else if (isPasswordEmpty) {
-            helperText2.setTextColor(Color.GRAY)
-            imageHelperText2.visibility = View.INVISIBLE
-        } else {
-            helperText2.setTextColor(Color.GREEN)
+            false
+        }  else {
+            helperText2.setTextColor(Color.parseColor("#1BA228"))
             imageHelperText2.setImageResource(R.drawable.check)
             imageHelperText2.visibility = View.VISIBLE
             true
@@ -196,10 +218,12 @@ class RegistrationFragment : Fragment() {
 
         val validOneNumber = if (!isPasswordOneNumber) {
             helperText3.setTextColor(Color.RED)
+            binding.textInputLayoutPassword.editText?.setTextColor(Color.RED)
             imageHelperText3.setImageResource(R.drawable.nocheck)
             imageHelperText3.visibility = View.VISIBLE
+            false
         } else {
-            helperText3.setTextColor(Color.GREEN)
+            helperText3.setTextColor(Color.parseColor("#1BA228"))
             imageHelperText3.setImageResource(R.drawable.check)
             imageHelperText3.visibility = View.VISIBLE
             true
@@ -207,10 +231,12 @@ class RegistrationFragment : Fragment() {
 
         val validSpecialCharacter = if (!containsSpecialCharacter && !isPasswordEmpty) {
             helperText4.setTextColor(Color.RED)
+            binding.textInputLayoutPassword.editText?.setTextColor(Color.RED)
             imageHelperText4.setImageResource(R.drawable.nocheck)
             imageHelperText4.visibility = View.VISIBLE
+            false
         } else {
-            helperText4.setTextColor(Color.GREEN)
+            helperText4.setTextColor(Color.parseColor("#1BA228"))
             imageHelperText4.setImageResource(R.drawable.check)
             imageHelperText4.visibility = View.VISIBLE
             true
@@ -227,14 +253,13 @@ class RegistrationFragment : Fragment() {
             imageHelperText4.visibility = View.INVISIBLE
 
         }
+        val isAllValid = validSpecialCharacter && validOneNumber && validMatches && validLength
 
+        if (isAllValid) {
+            binding.textInputLayoutPassword.editText?.setTextColor(Color.BLACK)
         }
 
+        return isAllValid
 
-//        fun valide():Boolean{
-//            if((validLength && validMatches && validOneNumber)== true){
-//                true
-//            }
-//        }
-//        return valide
-        }
+    }
+}

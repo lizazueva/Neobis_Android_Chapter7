@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.neobis_android_chapter7.MainActivity
 import com.example.neobis_android_chapter7.R
 import com.example.neobis_android_chapter7.databinding.FragmentAuthorizationBinding
+import com.example.neobis_android_chapter7.utils.Resource
 import com.example.neobis_android_chapter7.viewModel.MyViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -42,13 +43,31 @@ class AuthorizationFragment : Fragment() {
         checkInput()
 
         binding.buttonFurther.setOnClickListener {
-//            snackBar(it)
-            findNavController().navigate(R.id.action_authorizationFragment_to_returnFragment)
+            val username = binding.editTextLogin.text.toString().trim()
+            val password = binding.editTextPassword.text.toString().trim()
+
+            viewModelAuthorizationFragment.login(username, password)
+            observe()
         }
 
 
-
     }
+
+    private fun observe() {
+        viewModelAuthorizationFragment.token.observe(viewLifecycleOwner, { token ->
+            when (token) {
+                is Resource.Success -> {
+                    findNavController().navigate(R.id.action_authorizationFragment_to_returnFragment)
+                }
+                is Resource.Error -> {
+                    snackBar()
+                }
+                is Resource.Loading -> {
+                // загрузка
+                }
+            }
+        })
+}
 
     private fun checkInput() {
         val loginInput = binding.editTextLogin.text.toString().trim()
@@ -57,8 +76,8 @@ class AuthorizationFragment : Fragment() {
         binding.editTextPassword.setText(passwordInput)
     }
 
-    private fun snackBar(view: View){
-        val snackbar = Snackbar.make(view, "Неверный логин или пароль", Snackbar.LENGTH_SHORT)
+    private fun snackBar(){
+        val snackbar = Snackbar.make(binding.root, "Неверный логин или пароль", Snackbar.LENGTH_SHORT)
         val params = snackbar.view.layoutParams as CoordinatorLayout.LayoutParams
         params.gravity = Gravity.TOP
         snackbar.view.layoutParams = params

@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val repository = Repository(this)
+        val repository = Repository()
         val viewModelFactory = ViewModelProviderFactory(repository)
         myViewModel = ViewModelProvider(this, viewModelFactory).get(MyViewModel::class.java)
     }
