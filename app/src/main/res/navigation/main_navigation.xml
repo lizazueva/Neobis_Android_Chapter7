@@ -67,5 +67,8 @@
         <action
             android:id="@+id/action_registrationLetterFragment_to_welcomeFragment"
             app:destination="@id/welcomeFragment" />
+        <argument
+            android:name="mail"
+            app:argType="com.example.neobis_android_chapter7.model.UserRequest" />
     </fragment>
 </navigation>

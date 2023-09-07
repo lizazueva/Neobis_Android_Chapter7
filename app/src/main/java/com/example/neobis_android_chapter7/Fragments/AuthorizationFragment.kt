@@ -57,6 +57,7 @@ class AuthorizationFragment : Fragment() {
         viewModelAuthorizationFragment.token.observe(viewLifecycleOwner, { token ->
             when (token) {
                 is Resource.Success -> {
+//                    val action =  нужно передавать токен?
                     findNavController().navigate(R.id.action_authorizationFragment_to_returnFragment)
                 }
                 is Resource.Error -> {

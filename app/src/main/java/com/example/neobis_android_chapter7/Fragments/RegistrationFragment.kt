@@ -51,7 +51,9 @@ class RegistrationFragment : Fragment() {
         binding.repeatPassword.addTextChangedListener(inputText)
 
         binding.buttonFurther.setOnClickListener {
-            findNavController().navigate(R.id.action_registrationFragment_to_registrationLetterFragment)
+            val mail = binding.editTextMail.text.toString().trim()
+            val action = RegistrationFragmentDirections.actionRegistrationFragmentToRegistrationLetterFragment(mail)
+            findNavController().navigate(action)
 
         }
     }

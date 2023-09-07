@@ -39,11 +39,15 @@ class MyViewModel(private var repository: Repository): ViewModel() {
         }
     }
 
-    fun newUser(email: String, username: String, password1: String, password2: String){
+    fun newUser(email: String, username: String, password1: String, password2: String) {
         viewModelScope.launch {
             val userRequest = UserRequest(email, username, password1, password2)
             val response = repository.registration(userRequest)
-            if (response.)
+            if (response.isSuccessful) {
+
+            } else {
+
+            }
         }
     }
 }
