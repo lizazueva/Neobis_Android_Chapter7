@@ -1,19 +1,15 @@
 package com.example.neobis_android_chapter7.viewModel
 
 import android.util.Log
-import androidx.fragment.app.Fragment.SavedState
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.neobis_android_chapter7.api.Repository
 import com.example.neobis_android_chapter7.model.LoginRequest
-import com.example.neobis_android_chapter7.model.LoginResponse
 import com.example.neobis_android_chapter7.model.UserRequest
-import com.example.neobis_android_chapter7.utils.Constants
 import com.example.neobis_android_chapter7.utils.Resource
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 
 class MyViewModel(private var repository: Repository): ViewModel() {
@@ -41,11 +37,15 @@ class MyViewModel(private var repository: Repository): ViewModel() {
                 val loginRequest = LoginRequest(username, password)
                 val response = repository.login(loginRequest)
                 if (response.isSuccessful) {
+                    _token.postValue(Resource.Loading())
                     val loginResponse = response.body()
                     loginResponse?.access?.let { saveToken(it) }
+                }else{
+                    _token.postValue(Resource.Loading())
+                    _token.postValue(Resource.Error("Ошибка авторизации"))
                 }
             } catch (e: Exception) {
-                Log.e("MyViewModel", "Ошибка регистрации: ${e.message}")
+                Log.e("MyViewModel", "Ошибка авторизации: ${e.message}")
                 _token.postValue(Resource.Error(e.message ?: "Ошибка авторизации"))
             }
         }
@@ -57,9 +57,12 @@ class MyViewModel(private var repository: Repository): ViewModel() {
                 val userRequest = UserRequest(email, username, password1, password2)
                 val response = repository.registration(userRequest)
                 if (response.isSuccessful) {
+                    _userSaved.postValue(Resource.Loading())
                     val responseBody = response.body()
                     saveUserSaved(true)
                     Log.d("Registration", "Successful: $responseBody")
+                }else{
+                    _userSaved.postValue(Resource.Error("Ошибка регистрации"))
                 }
             } catch (e: Exception) {
                 Log.e("MyViewModel", "Ошибка регистрации: ${e.message}")

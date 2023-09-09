@@ -14,8 +14,10 @@ import com.example.neobis_android_chapter7.R
 import com.example.neobis_android_chapter7.databinding.FragmentRegistrationBinding
 import com.example.neobis_android_chapter7.viewModel.MyViewModel
 import android.content.res.ColorStateList
+import android.widget.ImageView
 import android.widget.Toast
 import com.example.neobis_android_chapter7.utils.Resource
+import com.google.android.material.textfield.TextInputLayout
 
 
 class RegistrationFragment : Fragment() {
@@ -72,6 +74,7 @@ class RegistrationFragment : Fragment() {
         viewModelRegistrationFragment.userSaved.observe(viewLifecycleOwner, {userSaved->
             when(userSaved) {
                 is Resource.Success -> {
+                    hideProgressBar()
                     var mail = binding.editTextMail.text.toString().trim()
                     val action = RegistrationFragmentDirections.actionRegistrationFragmentToRegistrationLetterFragment(mail)
                     findNavController().navigate(action)
@@ -79,11 +82,12 @@ class RegistrationFragment : Fragment() {
                 }
 
                 is Resource.Error -> {
-                    Toast.makeText(requireContext(), "Пользовательне не зарегестрирован", Toast.LENGTH_SHORT).show()
+                    hideProgressBar()
+                    Toast.makeText(requireContext(), "Пользователь не зарегестрирован", Toast.LENGTH_SHORT).show()
                 }
 
                 is Resource.Loading -> {
-                    // загрузка
+                    showProgressBar()
                 }
             }
         })
@@ -140,17 +144,13 @@ class RegistrationFragment : Fragment() {
 
         if (repeatPasswordInput != passwordInput) {
             binding.textInputLayoutPasswordRepeat.helperText = "Пароли не совпадают"
-            binding.textInputLayoutPasswordRepeat.editText?.setTextColor(Color.RED)
-            binding.textInputLayoutPasswordRepeat.setErrorTextColor(ColorStateList.valueOf(Color.RED))
+            setFieldColor(binding.textInputLayoutPasswordRepeat, Color.RED)
         } else if (isPasswordEmpty) {
             binding.textInputLayoutPasswordRepeat.helperText = "Заполните это поле"
-            binding.textInputLayoutPasswordRepeat.editText?.setTextColor(Color.RED)
-            binding.textInputLayoutPasswordRepeat.setErrorTextColor(ColorStateList.valueOf(Color.RED))
+            setFieldColor(binding.textInputLayoutPasswordRepeat, Color.RED)
         } else {
             binding.textInputLayoutPasswordRepeat.helperText = null
-            binding.textInputLayoutPasswordRepeat.editText?.setTextColor(Color.BLACK)
-            binding.textInputLayoutPasswordRepeat.setErrorTextColor(ColorStateList.valueOf(Color.BLACK))
-
+            setFieldColor(binding.textInputLayoutPasswordRepeat, Color.BLACK)
         }
 
     }
@@ -162,22 +162,16 @@ class RegistrationFragment : Fragment() {
 
         if (!isEmailMatches) {
             binding.textInputLayoutEditTextMail.helperText = "Присутствуют недопустимые символы"
-            binding.textInputLayoutEditTextMail.editText?.setTextColor(Color.RED)
-            binding.textInputLayoutEditTextMail.setErrorTextColor(ColorStateList.valueOf(Color.RED))
-
-
+            setFieldColor(binding.textInputLayoutEditTextMail, Color.RED)
         } else if (isEmailEmpty) {
             binding.textInputLayoutEditTextMail.helperText = "Заполните это поле"
-            binding.textInputLayoutEditTextMail.editText?.setTextColor(Color.RED)
-
+            setFieldColor(binding.textInputLayoutEditTextMail, Color.RED)
         } else if (!isEmailContains) {
             binding.textInputLayoutEditTextMail.helperText = "Нет специальных символов @, ."
-            binding.textInputLayoutEditTextMail.editText?.setTextColor(Color.RED)
-
+            setFieldColor(binding.textInputLayoutEditTextMail, Color.RED)
         } else {
             binding.textInputLayoutEditTextMail.helperText = null
-            binding.textInputLayoutEditTextMail.editText?.setTextColor(Color.BLACK)
-
+            setFieldColor(binding.textInputLayoutEditTextMail, Color.BLACK)
         }
     }
 
@@ -188,17 +182,13 @@ class RegistrationFragment : Fragment() {
 
         if (!isLoginMatches) {
             binding.textInputLayoutEditTextLogin.helperText = "Присутствуют недопустимые символы"
-            binding.textInputLayoutEditTextLogin.editText?.setTextColor(Color.RED)
-            binding.textInputLayoutEditTextLogin.setErrorTextColor(ColorStateList.valueOf(Color.RED))
+            setFieldColor(binding.textInputLayoutEditTextLogin, Color.RED)
         } else if (isLoginEmpty) {
             binding.textInputLayoutEditTextLogin.helperText = "Заполните это поле"
-            binding.textInputLayoutEditTextLogin.editText?.setTextColor(Color.RED)
-            binding.textInputLayoutEditTextLogin.setErrorTextColor(ColorStateList.valueOf(Color.RED))
+            setFieldColor(binding.textInputLayoutEditTextLogin, Color.RED)
         } else {
             binding.textInputLayoutEditTextLogin.helperText = null
-            binding.textInputLayoutEditTextLogin.editText?.setTextColor(Color.BLACK)
-            binding.textInputLayoutEditTextLogin.setErrorTextColor(ColorStateList.valueOf(Color.BLACK))
-
+            setFieldColor(binding.textInputLayoutEditTextLogin, Color.BLACK)
         }
     }
 
@@ -226,52 +216,44 @@ class RegistrationFragment : Fragment() {
         val validLength = if (isPasswordLength && !isPasswordEmpty) {
             helperText1.setTextColor(Color.RED)
             binding.textInputLayoutPassword.editText?.setTextColor(Color.RED)
-            imageHelperText1.setImageResource(R.drawable.nocheck)
-            imageHelperText1.visibility = View.VISIBLE
+            updateImageHelperText(imageHelperText1, R.drawable.nocheck, View.VISIBLE)
             false
         }  else {
             helperText1.setTextColor(Color.parseColor("#1BA228"))
-            imageHelperText1.setImageResource(R.drawable.check)
-            imageHelperText1.visibility = View.VISIBLE
+            updateImageHelperText(imageHelperText1, R.drawable.check, View.VISIBLE)
             true
         }
 
         val validMatches = if ((!containsUppercase || !containsLowercase) && !isPasswordEmpty) {
             helperText2.setTextColor(Color.RED)
             binding.textInputLayoutPassword.editText?.setTextColor(Color.RED)
-            imageHelperText2.setImageResource(R.drawable.nocheck)
-            imageHelperText2.visibility = View.VISIBLE
+            updateImageHelperText(imageHelperText2, R.drawable.nocheck, View.VISIBLE)
             false
         }  else {
             helperText2.setTextColor(Color.parseColor("#1BA228"))
-            imageHelperText2.setImageResource(R.drawable.check)
-            imageHelperText2.visibility = View.VISIBLE
+            updateImageHelperText(imageHelperText2, R.drawable.check, View.VISIBLE)
             true
         }
 
         val validOneNumber = if (!isPasswordOneNumber) {
             helperText3.setTextColor(Color.RED)
             binding.textInputLayoutPassword.editText?.setTextColor(Color.RED)
-            imageHelperText3.setImageResource(R.drawable.nocheck)
-            imageHelperText3.visibility = View.VISIBLE
+            updateImageHelperText(imageHelperText3, R.drawable.nocheck, View.VISIBLE)
             false
         } else {
             helperText3.setTextColor(Color.parseColor("#1BA228"))
-            imageHelperText3.setImageResource(R.drawable.check)
-            imageHelperText3.visibility = View.VISIBLE
+            updateImageHelperText(imageHelperText3, R.drawable.check, View.VISIBLE)
             true
         }
 
         val validSpecialCharacter = if (!containsSpecialCharacter && !isPasswordEmpty) {
             helperText4.setTextColor(Color.RED)
             binding.textInputLayoutPassword.editText?.setTextColor(Color.RED)
-            imageHelperText4.setImageResource(R.drawable.nocheck)
-            imageHelperText4.visibility = View.VISIBLE
+            updateImageHelperText(imageHelperText4, R.drawable.nocheck, View.VISIBLE)
             false
         } else {
             helperText4.setTextColor(Color.parseColor("#1BA228"))
-            imageHelperText4.setImageResource(R.drawable.check)
-            imageHelperText4.visibility = View.VISIBLE
+            updateImageHelperText(imageHelperText4, R.drawable.check, View.VISIBLE)
             true
         }
 
@@ -294,5 +276,23 @@ class RegistrationFragment : Fragment() {
 
         return isAllValid
 
+    }
+
+    private fun setFieldColor(textInputLayout: TextInputLayout, color: Int) {
+        textInputLayout.editText?.setTextColor(color)
+        textInputLayout.setErrorTextColor(ColorStateList.valueOf(color))
+    }
+
+    private fun updateImageHelperText(imageView: ImageView, resourceId: Int, visibility: Int) {
+        imageView.setImageResource(resourceId)
+        imageView.visibility = visibility
+    }
+
+    private  fun hideProgressBar(){
+        binding.progressBar.visibility = View.INVISIBLE
+    }
+
+    private  fun showProgressBar(){
+        binding.progressBar.visibility = View.VISIBLE
     }
 }

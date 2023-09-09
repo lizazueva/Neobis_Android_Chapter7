@@ -60,14 +60,16 @@ class AuthorizationFragment : Fragment() {
         viewModelAuthorizationFragment.token.observe(viewLifecycleOwner, { token ->
             when (token) {
                 is Resource.Success -> {
+                    hideProgressBar()
                     sharPref()
                     sharePref.setFirstTimeUser(false)
                 }
                 is Resource.Error -> {
+                    hideProgressBar()
                     snackBar()
                 }
                 is Resource.Loading -> {
-                // загрузка
+                    showProgressBar()
                 }
             }
         })
@@ -101,5 +103,13 @@ class AuthorizationFragment : Fragment() {
             .setTextColor(ContextCompat.getColor(requireContext(), R.color.red))
         snackbar.view.background = ContextCompat.getDrawable(requireContext(), R.drawable.snackbar)
         snackbar.show()
+    }
+
+    private  fun hideProgressBar(){
+        binding.progressBar.visibility = View.INVISIBLE
+    }
+
+    private  fun showProgressBar(){
+        binding.progressBar.visibility = View.VISIBLE
     }
 }
