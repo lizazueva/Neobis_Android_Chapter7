@@ -14,6 +14,8 @@ import com.example.neobis_android_chapter7.R
 import com.example.neobis_android_chapter7.databinding.FragmentRegistrationBinding
 import com.example.neobis_android_chapter7.viewModel.MyViewModel
 import android.content.res.ColorStateList
+import android.widget.Toast
+import com.example.neobis_android_chapter7.utils.Resource
 
 
 class RegistrationFragment : Fragment() {
@@ -49,13 +51,42 @@ class RegistrationFragment : Fragment() {
         binding.editTextPassword.addTextChangedListener(inputText)
         binding.repeatPassword.addTextChangedListener(inputText)
 
+        clickButton()
+    }
 
+    private fun clickButton(){
         binding.buttonFurther.setOnClickListener {
-            val mail = binding.editTextMail.text.toString().trim()
-            val action = RegistrationFragmentDirections.actionRegistrationFragmentToRegistrationLetterFragment(mail)
-            findNavController().navigate(action)
+
+            var mail = binding.editTextMail.text.toString().trim()
+            var username = binding.editTextLogin.text.toString().trim()
+            var password1 = binding.editTextPassword.text.toString().trim()
+            var password2 = binding.repeatPassword.text.toString().trim()
+            viewModelRegistrationFragment.newUser(mail, username, password1, password2)
+
+            observe()
 
         }
+    }
+
+    private fun observe() {
+        viewModelRegistrationFragment.userSaved.observe(viewLifecycleOwner, {userSaved->
+            when(userSaved) {
+                is Resource.Success -> {
+                    var mail = binding.editTextMail.text.toString().trim()
+                    val action = RegistrationFragmentDirections.actionRegistrationFragmentToRegistrationLetterFragment(mail)
+                    findNavController().navigate(action)
+                    findNavController().navigate(R.id.action_registrationFragment_to_registrationLetterFragment)
+                }
+
+                is Resource.Error -> {
+                    Toast.makeText(requireContext(), "Пользовательне не зарегестрирован", Toast.LENGTH_SHORT).show()
+                }
+
+                is Resource.Loading -> {
+                    // загрузка
+                }
+            }
+        })
     }
 
     private val inputText = object : TextWatcher {

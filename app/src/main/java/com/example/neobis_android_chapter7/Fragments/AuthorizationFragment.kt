@@ -14,6 +14,7 @@ import com.example.neobis_android_chapter7.MainActivity
 import com.example.neobis_android_chapter7.R
 import com.example.neobis_android_chapter7.databinding.FragmentAuthorizationBinding
 import com.example.neobis_android_chapter7.utils.Resource
+import com.example.neobis_android_chapter7.utils.SharePref
 import com.example.neobis_android_chapter7.viewModel.MyViewModel
 import com.google.android.material.snackbar.Snackbar
 
@@ -22,6 +23,8 @@ class AuthorizationFragment : Fragment() {
 
     private lateinit var binding: FragmentAuthorizationBinding
     lateinit var viewModelAuthorizationFragment: MyViewModel
+    private lateinit var sharePref: SharePref
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,8 +60,8 @@ class AuthorizationFragment : Fragment() {
         viewModelAuthorizationFragment.token.observe(viewLifecycleOwner, { token ->
             when (token) {
                 is Resource.Success -> {
-//                    val action =  нужно передавать токен?
-                    findNavController().navigate(R.id.action_authorizationFragment_to_returnFragment)
+                    sharPref()
+                    sharePref.setFirstTimeUser(false)
                 }
                 is Resource.Error -> {
                     snackBar()
@@ -69,6 +72,18 @@ class AuthorizationFragment : Fragment() {
             }
         })
 }
+
+    private fun sharPref() {
+        sharePref = SharePref(requireContext())
+
+        // Проверка, является ли пользователь новым или нет
+        if (sharePref.isFirstTimeUser()) {
+            findNavController().navigate(R.id.action_authorizationFragment_to_welcomeFragment)
+        } else {
+            findNavController().navigate(R.id.action_authorizationFragment_to_returnFragment)
+        }
+    }
+
 
     private fun checkInput() {
         val loginInput = binding.editTextLogin.text.toString().trim()

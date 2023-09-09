@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_authorizationFragment_to_returnFragment"
             app:destination="@id/returnFragment" />
+        <action
+            android:id="@+id/action_authorizationFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -64,11 +67,8 @@
         <action
             android:id="@+id/action_registrationLetterFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
-        <action
-            android:id="@+id/action_registrationLetterFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
         <argument
             android:name="mail"
-            app:argType="com.example.neobis_android_chapter7.model.UserRequest" />
+            app:argType="string" />
     </fragment>
 </navigation>

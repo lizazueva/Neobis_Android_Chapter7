@@ -34,7 +34,7 @@ class RegistrationLetterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        var mail = arguments?.getSerializable("mail") as LoginRequest
+        var mail = arguments?.getSerializable("mail")
         binding.textWelcome.text = getString(R.string.text_welcome_letter, mail)
 
         binding.imageBack.setOnClickListener {
