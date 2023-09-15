@@ -78,7 +78,6 @@ class RegistrationFragment : Fragment() {
                     var mail = binding.editTextMail.text.toString().trim()
                     val action = RegistrationFragmentDirections.actionRegistrationFragmentToRegistrationLetterFragment(mail)
                     findNavController().navigate(action)
-                    findNavController().navigate(R.id.action_registrationFragment_to_registrationLetterFragment)
                 }
 
                 is Resource.Error -> {

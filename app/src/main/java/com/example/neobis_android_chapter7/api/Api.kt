@@ -17,6 +17,6 @@ interface Api {
     @POST("api/token/")
     suspend fun login (@Body request: LoginRequest): Response<LoginResponse>
 
-    @POST("/registration/")
+    @POST("register/")
     suspend fun registration (@Body requestRegistration: UserRequest): Response<UserResponse>
 }

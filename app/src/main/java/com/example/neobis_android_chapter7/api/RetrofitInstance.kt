@@ -15,16 +15,16 @@ class RetrofitInstance {
             level = HttpLoggingInterceptor.Level.BODY
         }
 
-        private val tokenInterceptor = Interceptor { chain ->
-            val request = chain.request().newBuilder()
-                .addHeader("Authorization", Token.token ?: "Bearer ")
-                .build()
-            chain.proceed(request)
-        }
+//        private val tokenInterceptor = Interceptor { chain ->
+//            val request = chain.request().newBuilder()
+//                .addHeader("Authorization", Token.token ?: "Bearer ")
+//                .build()
+//            chain.proceed(request)
+//        }
 
         private val client = OkHttpClient.Builder()
             .addInterceptor(interceptor)
-            .addInterceptor(tokenInterceptor)
+//            .addInterceptor(tokenInterceptor)
             .build()
 
         private val retrofit by lazy {
